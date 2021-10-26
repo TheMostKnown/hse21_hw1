@@ -20,4 +20,12 @@ Moжно проверить наличие необходимых файлов �
 
 Далее, с помощью fastQC и multiQC оценим качество исходных чтений и получим по ним общую статистику:
 
-    
+    mkdir fastqc
+    ls *sub* | xargs -tI{} fastqc -o fastqc {}
+    mkdir multiqc
+    multiqc -o multiqc fastqc
+
+Далее для анализа получившихся файлов, я скачал данные с сервера к себе на компьютер:
+
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/fastqc ~/
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/multiqc ~/
