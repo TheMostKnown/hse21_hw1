@@ -30,4 +30,38 @@ Moжно проверить наличие необходимых файлов �
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/fastqc ~/
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/multiqc ~/
 
-Приведём скриншоты отчётов из fastQC и multiQC по мсходным чтениям:
+Приведём скриншоты отчётов из fastQC и multiQC по мсходным чтениям (также полный отчёт можно увидеть в файле *data/multiqc_report_1.html*, а все скриншоты в папке *images*):  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Adapter_content_1.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/General_statisctics_1.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Per_seq_qual_scores_1.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Seq_qual_hist_1.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Sequence_Counts_1.png)  
+
+Теперь воспользуемся <code>platanus_trim</code> и <code>platanus_internal_trim</code> для подрезания чтения по качеству:
+
+    platanus_trim sub1.fq sub2.fq
+    platanus_internal_trim sub1_mp.fq sub2_mp.fq
+    
+Теперь удалим исходные данныые, так как они нам больше не понядобятся:
+
+    rm oil_R1.fastq
+    rm oil_R2.fastq
+    rm oilMP_S4_L001_R1_001.fastq
+    rm oilMP_S4_L001_R2_001.fastq
+    rm sub1.fq
+    rm sub2.fq
+    rm sub1_mp.fq
+    rm sub2_mp.fq
+
+Теперь с помощью fastQC и multiQC оценим качество подрезанных чтений:
+
+    mkdir trimmed_fastqc
+    ls *sub* | xargs -tI{} fastqc -o trimmed_fastqc {}
+    mkdir trimmed_multiqc
+    multiqc -o trimmed_multiqc trimmed_fastqc
+
+Далее для анализа получившихся файлов, я скачал данные с сервера к себе на компьютер:
+
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_fastqc ~/
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_multiqc ~/
+
