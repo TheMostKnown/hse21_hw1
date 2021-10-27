@@ -48,4 +48,20 @@ Moжно проверить наличие необходимых файлов �
     rm oil_R2.fastq
     rm oilMP_S4_L001_R1_001.fastq
     rm oilMP_S4_L001_R2_001.fastq
+    rm sub1.fq
+    rm sub2.fq
+    rm sub1_mp.fq
+    rm sub2_mp.fq
+
+Теперь с помощью fastQC и multiQC оценим качество подрезанных чтений:
+
+    mkdir trimmed_fastqc
+    ls *sub* | xargs -tI{} fastqc -o trimmed_fastqc {}
+    mkdir trimmed_multiqc
+    multiqc -o trimmed_multiqc trimmed_fastqc
+
+Далее для анализа получившихся файлов, я скачал данные с сервера к себе на компьютер:
+
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_fastqc ~/
+    scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_multiqc ~/
 
