@@ -65,3 +65,10 @@ Moжно проверить наличие необходимых файлов �
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_fastqc ~/
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_multiqc ~/
 
+Приведём скриншоты отчётов из fastQC и multiQC по подрезанным чтениям (также полный отчёт можно увидеть в файле *data/multiqc_report_2.html*, а все скриншоты в папке *images*):  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Adapter_content_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/General_statisctics_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Per_seq_qual_scores_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Seq_qual_hist_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Sequence_Counts_2.png)  
+
