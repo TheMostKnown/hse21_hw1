@@ -72,3 +72,15 @@ Moжно проверить наличие необходимых файлов �
 ![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Seq_qual_hist_2.png)  
 ![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Sequence_Counts_2.png)  
 
+Далее соберем континги из подрезанных чтений:
+
+    platanus assemble -f sub1.fq.trimmed sub2.fq.trimmed 2> logfile.log
+
+Собираем скаффолды из контигов, а также из подрезанных чтений:
+
+    platanus scaffold -c out_contig.fa -IP1 sub1.fq.trimmed sub2.fq.trimmed -OP2 sub1_mp.fq.int_trimmed sub2_mp.fq.int_trimmed 2> scaffold.log
+
+Уменьшаем кол-во гэпов с помощью подрезанных чтений:
+
+    platanus gap_close -c out_scaffold.fa -IP1 sub1.fq.trimmed sub2.fq.trimmed -OP2 sub1_mp.fq.int_trimmed sub2_mp.fq.int_trimmed 2> gapclose.log
+
