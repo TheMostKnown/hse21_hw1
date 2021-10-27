@@ -65,3 +65,35 @@ Moжно проверить наличие необходимых файлов �
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_fastqc ~/
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/trimmed_multiqc ~/
 
+Приведём скриншоты отчётов из fastQC и multiQC по подрезанным чтениям (также полный отчёт можно увидеть в файле *data/multiqc_report_2.html*, а все скриншоты в папке *images*):  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Adapter_content_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/General_statisctics_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Per_seq_qual_scores_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Seq_qual_hist_2.png)  
+![](https://github.com/TheMostKnown/hse21_hw1/blob/main/images/Sequence_Counts_2.png)  
+
+Далее соберем контиги из подрезанных чтений:
+
+    platanus assemble -f sub1.fq.trimmed sub2.fq.trimmed 2> logfile.log
+
+И сохраним все контиги себе на локальный компьютер:
+
+    scp -P group_port login@server_ip:/home/aakosmachev/hw1/out_contig.fa ~/
+
+Собираем скаффолды из контигов, а также из подрезанных чтений:
+
+    platanus scaffold -c out_contig.fa -IP1 sub1.fq.trimmed sub2.fq.trimmed -OP2 sub1_mp.fq.int_trimmed sub2_mp.fq.int_trimmed 2> scaffold.log
+
+И сохраним все скаффолды себе на локальный компьютер:
+
+    scp -P group_port login@server_ip:/home/aakosmachev/hw1/out_scaffold.fa ~/
+
+Уменьшаем кол-во гэпов с помощью подрезанных чтений:
+
+    platanus gap_close -c out_scaffold.fa -IP1 sub1.fq.trimmed sub2.fq.trimmed -OP2 sub1_mp.fq.int_trimmed sub2_mp.fq.int_trimmed 2> gapclose.log
+
+И сохраним это себе на локальный компьютер:
+
+    scp -P group_port login@server_ip:/home/aakosmachev/hw1/out_gapClosed.fa ~/
+
+Данные файлы можно будет увидеть в папке *data*.
