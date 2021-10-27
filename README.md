@@ -29,3 +29,5 @@ Moжно проверить наличие необходимых файлов �
 
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/fastqc ~/
     scp -P group_port -r login@server_ip:/home/aakosmachev/hw1/multiqc ~/
+
+Приведём скриншоты отчётов из fastQC и multiQC по мсходным чтениям:
